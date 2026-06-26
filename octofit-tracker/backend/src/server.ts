@@ -7,6 +7,7 @@ import {
   User,
   Workout,
 } from './models';
+import { connectToDatabase } from './database';
 
 const modelMap: Record<string, mongoose.Model<any>> = {
   users: User,
@@ -66,7 +67,7 @@ app.use('/api/workouts', createRouter('workouts'));
 
 const startServer = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/octofit_db');
+    await connectToDatabase();
     console.log('Connected to MongoDB');
   } catch (error) {
     console.error('MongoDB connection failed:', error);

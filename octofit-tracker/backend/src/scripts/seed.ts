@@ -6,12 +6,11 @@ import {
   User,
   Workout,
 } from '../models';
+import { connectToDatabase } from '../database';
 
 // Seed the octofit_db database with test data
 const seedDatabase = async () => {
-  const uri = process.env.MONGO_URI || 'mongodb://localhost:27017/octofit_db';
-
-  await mongoose.connect(uri);
+  await connectToDatabase();
   console.log('Connected to MongoDB for seeding');
 
   await Promise.all([

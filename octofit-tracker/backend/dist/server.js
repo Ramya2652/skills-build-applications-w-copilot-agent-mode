@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const mongoose_1 = __importDefault(require("mongoose"));
 const models_1 = require("./models");
+const database_1 = require("./database");
 const modelMap = {
     users: models_1.User,
     teams: models_1.Team,
@@ -57,7 +57,7 @@ app.use('/api/leaderboard', createRouter('leaderboard'));
 app.use('/api/workouts', createRouter('workouts'));
 const startServer = async () => {
     try {
-        await mongoose_1.default.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/octofit_db');
+        await (0, database_1.connectToDatabase)();
         console.log('Connected to MongoDB');
     }
     catch (error) {
